@@ -1,7 +1,41 @@
 <html>
 <head>
-<title>	First flask app </title>
+<title>	Triquetra Login</title>
 </head>
+
+
+<style>
+	body{
+		background: url('https://images.unsplash.com/photo-1476820865390-c52aeebb9891?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NHx8YmFja2dyb3VuZHxlbnwwfDB8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60');
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+	
+	form{
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		color: white;
+		font-family: cursive;
+		font-size: large;
+	}
+	p{
+		margin-left: auto;
+		margin-right: auto;
+	}
+	a{
+		color: white;
+		font-family: cursive;
+		font-size: large
+	}
+	
+	input{
+		background-color: rgba(180, 180, 180, 0.3);
+		color: white;
+		
+	}
+	</style>
 <body>
 <p> {{error}} </p>
 <form action="/login" method="POST">

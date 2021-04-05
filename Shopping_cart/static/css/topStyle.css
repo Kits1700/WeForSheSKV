@@ -9,7 +9,7 @@
 }
 
 #title {
-	background-color: black;
+	background-color:white;
 	display: inline-block;
 	width: 100%;
 }
@@ -34,7 +34,7 @@
 }
 
 .dropbtn {
-	background-color: black;
+	background-color: rgba(252, 140, 11, 0.932);
 	color: white;
 	padding: 16px;
 	font-size: 15px;
@@ -52,7 +52,7 @@
 	position: absolute;
 	background-color: #f9f9f9;
 	min-width: 160px;
-	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	box-shadow: 0px 8px 16px 0px rgba(252, 140, 11, 0.932);
 }
 
 .dropdown-content a {
@@ -70,11 +70,11 @@
 }
 
 .dropdown:hover .dropbtn {
-	background-color: gray;
+	background-color: rgba(252, 140, 11, 0.932);
 }
 
 #signInButton {
-	color: yellow;
+	color: coral;
 	margin-top: 20px;
 	margin-bottom: 20px;
 	margin-left: 20px;
