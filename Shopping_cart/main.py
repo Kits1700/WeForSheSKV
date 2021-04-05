@@ -1,6 +1,7 @@
 from flask import *
 import sqlite3, hashlib, os
 from werkzeug.utils import secure_filename
+import pandas as pd
 
 app = Flask(__name__)
 app.secret_key = 'random string'
@@ -15,6 +16,7 @@ def getLoginDetails():
             loggedIn = False
             firstName = ''
             noOfItems = 0
+            userId = -1
         else:
             loggedIn = True
             cur.execute("SELECT userId, firstName FROM users WHERE email = ?", (session['email'], ))
@@ -22,14 +24,30 @@ def getLoginDetails():
             cur.execute("SELECT count(productId) FROM kart WHERE userId = ?", (userId, ))
             noOfItems = cur.fetchone()[0]
     conn.close()
-    return (loggedIn, firstName, noOfItems)
+    return (loggedIn, firstName, noOfItems,userId)
+
+def customer_recomendation(customer_id):
+    df_output = pd.read_csv('option1_recommendation.csv')
+    if int(customer_id) not in df_output['customerId'].tolist():
+        print('Customer not found.')
+        return []
+
+    rec = df_output.loc[df_output['customerId'] == customer_id, 'recommendedProducts'].values[0]
+    print(type(rec))
+    rec = rec.split('|')
+    rec = [int(s) for s in rec]
+    return rec
 
 @app.route("/")
 def root():
-    loggedIn, firstName, noOfItems = getLoginDetails()
+    loggedIn, firstName, noOfItems, userId = getLoginDetails()
     with sqlite3.connect('database.db') as conn:
         cur = conn.cursor()
-        cur.execute('SELECT productId, name, price, description, image, stock FROM products')
+        rec = []
+        if loggedIn:
+            rec = customer_recomendation(userId)
+        rec_tuple = tuple(rec)
+        cur.execute('SELECT productId, name, price, description, image, stock FROM products WHERE productId IN {}'.format(rec_tuple))
         itemData = cur.fetchall()
         print(itemData)
         cur.execute('SELECT categoryId, name FROM categories')
@@ -101,7 +119,7 @@ def removeItem():
 
 @app.route("/displayCategory")
 def displayCategory():
-        loggedIn, firstName, noOfItems = getLoginDetails()
+        loggedIn, firstName, noOfItems,userId  = getLoginDetails()
         categoryId = request.args.get("categoryId")
         with sqlite3.connect('database.db') as conn:
             cur = conn.cursor()
@@ -116,14 +134,14 @@ def displayCategory():
 def profileHome():
     if 'email' not in session:
         return redirect(url_for('root'))
-    loggedIn, firstName, noOfItems = getLoginDetails()
+    loggedIn, firstName, noOfItems, userId = getLoginDetails()
     return render_template("profileHome.html", loggedIn=loggedIn, firstName=firstName, noOfItems=noOfItems)
 
 @app.route("/account/profile/edit")
 def editProfile():
     if 'email' not in session:
         return redirect(url_for('root'))
-    loggedIn, firstName, noOfItems = getLoginDetails()
+    loggedIn, firstName, noOfItems, userId = getLoginDetails()
     with sqlite3.connect('database.db') as conn:
         cur = conn.cursor()
         cur.execute("SELECT userId, email, firstName, lastName, address1, address2, zipcode, city, state, country, phone FROM users WHERE email = ?", (session['email'], ))
@@ -135,7 +153,7 @@ def editProfile():
 def viewProfile():
     if 'email' not in session:
         return redirect(url_for('root'))
-    loggedIn, firstName, noOfItems = getLoginDetails()
+    loggedIn, firstName, noOfItems, userId = getLoginDetails()
     with sqlite3.connect('database.db') as conn:
         cur = conn.cursor()
         cur.execute("SELECT userId, email, firstName, lastName, address1, address2, zipcode, city, state, country, phone FROM users WHERE email = ?", (session['email'], ))
@@ -219,7 +237,7 @@ def login():
 
 @app.route("/productDescription")
 def productDescription():
-    loggedIn, firstName, noOfItems = getLoginDetails()
+    loggedIn, firstName, noOfItems, userId = getLoginDetails()
     productId = request.args.get('productId')
     with sqlite3.connect('database.db') as conn:
         cur = conn.cursor()
@@ -233,7 +251,11 @@ def addToCart():
     if 'email' not in session:
         return redirect(url_for('loginForm'))
     else:
+        loggedIn, firstName, noOfItems, userId = getLoginDetails()
         productId = int(request.args.get('productId'))
+        df = pd.read_csv('trx_data.csv')
+        df.loc[df["customerId"]==userId, "products"] = df.loc[df["customerId"]==userId, "products"].values[0] + '|' + str(productId) 
+        df.to_csv("trx_data.csv", index=False)
         with sqlite3.connect('database.db') as conn:
             cur = conn.cursor()
             cur.execute("SELECT userId FROM users WHERE email = ?", (session['email'], ))
@@ -252,7 +274,7 @@ def addToCart():
 def cart():
     if 'email' not in session:
         return redirect(url_for('loginForm'))
-    loggedIn, firstName, noOfItems = getLoginDetails()
+    loggedIn, firstName, noOfItems, userId = getLoginDetails()
     email = session['email']
     with sqlite3.connect('database.db') as conn:
         cur = conn.cursor()

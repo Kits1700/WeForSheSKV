@@ -42,7 +42,11 @@ conn.execute('''CREATE TABLE categories
 		name TEXT
 		)''')
 
-conn.execute('''INSERT INTO categories VALUES ( 1, 'lehenga')''')
+conn.execute('''INSERT INTO categories VALUES ( 1, 'Ethnic')''')
+conn.execute('''INSERT INTO categories VALUES ( 2, 'Dresses')''')
+conn.execute('''INSERT INTO categories VALUES ( 3, 'Tops')''')
+conn.execute('''INSERT INTO categories VALUES ( 4, 'Bottomwear')''')
+conn.execute('''INSERT INTO categories VALUES ( 5, 'Sweaters')''')
 
 conn.execute('''INSERT INTO products
 VALUES (1,'red lehenga', 5000, 'high quality bridal lehenga','products/lehenga1.jpg', 3, 1)''')
