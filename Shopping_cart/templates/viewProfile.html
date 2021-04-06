@@ -8,20 +8,161 @@
 
 <style>
 	body{
-		background: url('https://images.unsplash.com/photo-1599239663833-4c1cdc22892a?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8YmFja2dyb3VuZCUyMHBsYWluJTIwdGVhbHxlbnwwfDB8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60');
-		background-position: center;
-		background-size: cover;
-		font-family: cursive;
-		font-size: large;
-		color: aliceblue;
-	}
+
+background: url('https://images.unsplash.com/photo-1470290449668-02dd93d9420a?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTYyfHxwaW5rJTIwaW5zdGFncmFtfGVufDB8MHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');
+background-position: center;
+background-size: cover;
+font-family: cursive;
+font-size: large;
+color: white;
+
+}
+
+a{
+	color: aliceblue;
+	font-family: monospace;
+	font-size:xx-large;
+	font-weight: bolder;
+} 
+
+
+
+#itemImage {
+	height: 200px;
+	width: 150px;
+}
+
+
+table {
+	border-spacing: 20px;
+}
+
+#productName {
+	text-align: center;
+	font-weight: bold;
+}
+
+#productPrice {
+	text-align: center;
+}
+
+
+#title{
+	color: blueviolet;
+}
+
+#logo {
+	height: 40px;
+	width: 50px;
+	margin-left: 20px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-right: 20px;
+	float: left;
+}
+
+#title {
+	background-color:rgba(180, 180, 180, 0.5);
+	display: inline-block;
+	width: 100%;
+}
+
+#searchBox {
+	background-color: beige;
+	height: 20px;
+	width: 800px;
+	margin-left: 20px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-right: 20px;
+	float: left;
+	font-size: 1.5em;
+}
+
+#searchButton {
+	height: 25px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-right: 20px;
+	float: left;
+}
+
+.dropbtn {
+	background-color: rgba(252, 140, 11, 0.932);
+	color: white;
+	padding: 16px;
+	font-size: 15px;
+	border: none;
+	cursor: pointer;
+}
+
+.dropdown {
+	position: relative;
+	float: left;
+}
+
+.dropdown-content  {
+	display: none;
+	position: absolute;
+	background-color: rgba(180, 180, 180, 0.5);
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(252, 140, 11, 0.932);
+}
+
+.dropdown-content a {
+	font-size: 14px;
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+}
+
+.dropdown-content a:hover {background-color: coral;}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+.dropdown:hover .dropbtn {
+	background-color: rgba(252, 140, 11, 0.932);
+}
+
+#signInButton {
+	color: white;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-left: 20px;
+	margin-right: 20px;
+	float: left;
+	
+}
+#kart {
+	color: white;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-left: 20px;
+	margin-right: 20px;
+	float: left;
+}
+
+#cartIcon {
+	height: 30px;
+	width: 30px;
+}
+
+
+h2{
+	color: white;
+	font-family:monospace;
+	font-size:xx-large;
+}
 </style>
 
 
 <body>
 <div id="title">
 	<a href="/">
-		<img id="logo" src= {{ url_for('static', filename='images/logo.png') }} />
+		<img id="logo" src= {{ url_for('static', filename='images/L.png') }} />
 	</a>
 	<form>
 		<input id="searchBox" type="text" name="searchQuery">

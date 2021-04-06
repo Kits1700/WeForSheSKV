@@ -6,7 +6,7 @@
 
 <style>
 	body{
-		background: url('https://images.unsplash.com/photo-1476820865390-c52aeebb9891?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NHx8YmFja2dyb3VuZHxlbnwwfDB8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60');
+		background: url('https://images.unsplash.com/photo-1609929621943-6cf5f53be9d3?ixid=MXwxMjA3fDB8MHxzZWFyY2h8ODJ8fHBpbmslMjBpbnN0YWdyYW18ZW58MHwwfDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');
 		background-position: center;
 		background-repeat: no-repeat;
 		background-size: cover;
@@ -17,8 +17,13 @@
 		margin-left: auto;
 		margin-right: auto;
 		color: white;
-		font-family: cursive;
-		font-size: large;
+		font-family:monospace;
+		font-size:xx-large;
+		text-align:center;
+		margin-top: 20%;
+		margin-bottom: 20%;
+
+		
 	}
 	p{
 		margin-left: auto;
@@ -39,8 +44,8 @@
 <body>
 <p> {{error}} </p>
 <form action="/login" method="POST">
-	<p>Email: <input type="text" name="email"></p>
-	<p>Password: <input type="password" name="password"></p>
+	<p>Email: <input type="text" name="email" align="center"></p>
+	<p>Password: <input type="password" name="password" align="center"></p>
 	<p><input type="submit"></p>
 	<a href="/registerationForm">Register here</a>
 </form>
