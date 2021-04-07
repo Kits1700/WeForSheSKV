@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <title>ChatRoom</title>
+    </head>
+    <style>
+        body{
+            background: url('https://images.unsplash.com/photo-1571992579655-8134e2b8df0b?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NDl8fHJvb218ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        form{
+            margin-left: auto;
+            margin-right: auto;
+           
+            color:aliceblue;
+            font-family: cursive;
+            font-weight: bolder;
+          height: 50%;
+          padding-top: 20%;
+          font-size: xx-large;
+        }
+        h1{
+            color: aliceblue;
+            font-family: cursive;
+            font-weight: bolder;
+        }
+      
+    </style>
+    <body>
+        <h1>ChatRoom</h1>
+        <div class ="Form">
+        <form method="POST" align="middle" width="60" height="60">
+            {{ form.hidden_tag() }}
+            {{ form.name.label }}: {{ form.name() }} {% for error in form.name.errors %}{{ error }}{% endfor %}<br>
+            {{ form.room.label }}: {{ form.room() }} {% for error in form.room.errors %}{{ error }}{% endfor %}<br>
+            {{ form.submit() }}
+        </form>
+        </div>
+    </body>
+</html>
