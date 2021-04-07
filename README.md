@@ -1,8 +1,14 @@
-Flask-SocketIO-Chat
+Team Triquetra
 ===================
 
-A simple chat application that demonstrates how to structure a Flask-SocketIO application.
+# Steps to execute
+Main Website
+1) git clone  https://github.com/Kits1700/WeForSheSKV.git
+2) cd Shopping cart
+3) python main.py
 
-To run this application install the requirements in a virtual environment, run `python chat.py` and visit `http://localhost:5000` on one or more browser tabs.
-
-    $ python chat.py
+Open another terminal
+To activate chat server
+Make sure to run the chat server on a different loppback address
+1) git clone https://github.com/Kits1700/WeForSheSKV.git
+2) flask run -h localhost -p 3000
